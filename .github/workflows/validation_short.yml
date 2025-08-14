@@ -30,15 +30,28 @@ jobs:
     - name: Download feature logs
       uses: actions/download-artifact@v4
       with:
-        path: ci_outputs
-      #   # name: model-results
-      #   # path: validation_outputs/        
+        path: ./artifacts  # All artifacts go here, each in their own subfolder
 
-    - name: Extract the objective from the logs
-      id: branch_objectives
+    - name: Show downloaded structure
       run: |
-        b=$(grep -Po "(?<=INFO:__main__:Objective function: ).*" ci_outputs/logs/solve_network/* || true)
-        echo "branch=$b" >> "$GITHUB_OUTPUT"
+        echo "Downloaded artifacts:"
+        tree ./artifacts || find ./artifacts
+
+    - name: Cat all files
+    run: |
+      find ./artifacts -type f -path "*/logs/*" | while read file; do
+        echo "===== $file ====="
+        cat "$file"
+        echo
+      done
+
+
+
+    # - name: Extract the objective from the logs
+    #   id: branch_objectives
+    #   run: |
+    #     b=$(grep -Po "(?<=INFO:__main__:Objective function: ).*" /logs/solve_network/* || true)
+    #     echo "branch=$b" >> "$GITHUB_OUTPUT"
        # run: |
         #   echo "## 🧮 Model Results Summary" >> $GITHUB_STEP_SUMMARY
         #   for f in model_outputs/*.json; do
