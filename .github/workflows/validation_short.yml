@@ -38,12 +38,12 @@ jobs:
         tree ./artifacts || find ./artifacts
 
     - name: Cat all files
-    run: |
-      find ./artifacts -type f -path "*/logs/*" | while read file; do
-        echo "===== $file ====="
-        cat "$file"
-        echo
-      done
+      run: |
+        find ./artifacts -type f -path "*/logs/*" | while read file; do
+          echo "===== $file ====="
+          cat "$file"
+          echo
+        done
 
 
 
