@@ -34,12 +34,13 @@ jobs:
 
     - name: Show downloaded structure
       run: |
-        echo "Downloaded artifacts:"
-        tree ./artifacts || find ./artifacts
+        echo "Current working directory: $(pwd)"
+        echo "All files and folders after artifact download:"
+        find . -type f -o -type d | sort
 
     - name: Cat all files
       run: |
-        find ./artifacts -type f -path "*/logs/*" | while read file; do
+        find . -type f -path "*/logs/*" | while read file; do
           echo "===== $file ====="
           cat "$file"
           echo
