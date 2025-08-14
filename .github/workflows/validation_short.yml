@@ -29,12 +29,12 @@ jobs:
     steps:
     - name: Download feature logs
       uses: actions/download-artifact@v4
-      with:
-        name: ci_outputs
-        # name: results-${{ matrix.os }}
-        path: branch_logs
-        # name: model-results
-        # path: validation_outputs/        
+      # with:
+      #   name: ci_outputs
+      #   # name: results-${{ matrix.os }}
+      #   path: branch_logs
+      #   # name: model-results
+      #   # path: validation_outputs/        
 
     - name: Extract the objective from the logs
       id: branch_objectives
