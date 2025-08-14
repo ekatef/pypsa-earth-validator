@@ -9,7 +9,8 @@ on:
 
 jobs:
   validate-ci:
-    if: ${{ github.ref == 'refs/heads/add_objective_comparison' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}    
+    # if: ${{ github.ref == 'refs/heads/add_objective_comparison' || github.event_name == 'workflow_dispatch' }}
     name: OS
     runs-on: ${{ matrix.os }}-latest
     strategy:
@@ -26,7 +27,6 @@ jobs:
         #   env_file: envs/win-64.lock.yaml
 
     steps:
-
     - name: Download feature logs
       uses: actions/download-artifact@v4
       with:
