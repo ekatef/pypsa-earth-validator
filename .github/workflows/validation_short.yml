@@ -30,7 +30,8 @@ jobs:
     - name: Download feature logs
       uses: actions/download-artifact@v4
       with:
-        name: results-${{ matrix.os }}
+        name: ci_outputs
+        # name: results-${{ matrix.os }}
         path: branch_logs
         # name: model-results
         # path: validation_outputs/        
