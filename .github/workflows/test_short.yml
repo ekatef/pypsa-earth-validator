@@ -94,6 +94,7 @@ jobs:
           logs
           .snakemake/log
           results
+      if-no-files-found: ignore    
       # with:
       #   name: model-results
       #   path: test_output/
