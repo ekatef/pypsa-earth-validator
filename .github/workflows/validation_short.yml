@@ -29,17 +29,15 @@ jobs:
     steps:
     - name: Download feature logs
       uses: actions/download-artifact@v4
-      # with:
-      #   name: ci_outputs
-      #   # name: results-${{ matrix.os }}
-      #   path: branch_logs
+      with:
+        path: ci_outputs
       #   # name: model-results
       #   # path: validation_outputs/        
 
     - name: Extract the objective from the logs
       id: branch_objectives
       run: |
-        b=$(grep -Po "(?<=INFO:__main__:Objective function: ).*" branch_logs/logs/solve_network/* || true)
+        b=$(grep -Po "(?<=INFO:__main__:Objective function: ).*" ci_outputs/logs/solve_network/* || true)
         echo "branch=$b" >> "$GITHUB_OUTPUT"
        # run: |
         #   echo "## 🧮 Model Results Summary" >> $GITHUB_STEP_SUMMARY
