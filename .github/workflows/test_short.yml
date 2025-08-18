@@ -127,7 +127,7 @@ jobs:
         LOG_FILES=(./logs/solve_network/*_python.log ./logs/*/solve_network/*_python.log)
         echo "Extracting the objective values from the logs"
         OBJ_FOUND=$(grep -rHPo "$OBJ_STRING" "${LOG_FILES[@]}" || true)
-        
+
         # The objective can be also empty (in case some tests failed)
         if [ -z "$OBJ_FOUND" ]; then
           echo "Objective not found."
@@ -167,4 +167,29 @@ jobs:
         echo "GITHUB_STEP_SUMMARY successfully supplemented with a header"  
 
         printf "%b\n" "$TABLE" >> "$GITHUB_STEP_SUMMARY"
+
+
+    - name: Plot CI outputs
+      id: extract_obj
+      run: |
+        # TODO Account also for "*/results/networks/*.nc"
+        nc_files=$(find "$RESULTS_DIR" -type f -path "*/results/*/networks/*.nc")
+        
+        if [ -z "$nc_files" ]; then
+          echo "No .nc files found in any networks folder."
+          exit 1
+        fi
+
+        while IFS= read -r nc_file; do
+          echo "Processing file: $nc_file"
+        
+          folder=$(dirname "$nc_file")  # get the folder containing the .nc file
+          filename=$(basename "$nc_file" .nc)  # strip .nc extension
+          output_path="$folder/${filename}_plot.png"
+        
+          python3 scripts/non_workflow/plot_network.py "$nc_file" "$output_path"
+        
+          echo "Plot saved to: $output_path"
+        
+        done <<< "$nc_files"
      
