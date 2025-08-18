@@ -168,5 +168,5 @@ jobs:
 
         echo "GITHUB_STEP_SUMMARY successfully supplemented with a header"  
 
-        echo -e "$TABLE" >> "$GITHUB_STEP_SUMMARY"
+        printf "%b\n" "$TABLE" >> "$GITHUB_STEP_SUMMARY"
      
