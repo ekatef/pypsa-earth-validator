@@ -29,8 +29,8 @@ jobs:
     steps:
     - name: Download feature logs
       uses: actions/download-artifact@v4
-      with:
-        path: ./artifacts  # All artifacts go here, each in their own subfolder
+      # with:
+      #   path: ./artifacts  # All artifacts go here, each in their own subfolder
 
     - name: Show downloaded structure
       run: |
