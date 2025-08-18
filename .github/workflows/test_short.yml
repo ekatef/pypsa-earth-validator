@@ -127,6 +127,7 @@ jobs:
         LOG_FILES=(./logs/solve_network/*_python.log ./logs/*/solve_network/*_python.log)
         echo "Extracting the objective values from the logs"
         OBJ_FOUND=$(grep -rHPo "$OBJ_STRING" "${LOG_FILES[@]}" || true)
+        
         # The objective can be also empty (in case some tests failed)
         if [ -z "$OBJ_FOUND" ]; then
           echo "Objective not found."
@@ -139,8 +140,6 @@ jobs:
 
         echo "The objective extracted successfully"
 
-
-        # Write to the table
         TABLE="| Folder | File | Objective Value |"
         TABLE+="\n|:--------|:-----|------------------:|"
 
@@ -159,7 +158,6 @@ jobs:
           TABLE+="\n| $FOLDER | $BASENAME | \`$VALUE\` |"
         done <<< "$OBJ_FOUND"
         
-        # Print to terminal
         echo -e "$TABLE"
 
         echo "The output table is formed"
