@@ -134,3 +134,25 @@ jobs:
           echo "Objective value found: $OBJ_FOUND"
           echo "obj_match=$OBJ_FOUND" >> "$GITHUB_OUTPUT"
         fi
+
+      # Build Markdown table
+      TABLE="| File | Objective Value |\n|------|------------------|"
+  
+      while IFS= read -r line; do
+        FILE=$(echo "$line" | cut -d: -f1)
+        VALUE=$(echo "$line" | grep -Po "$OBJ_STRING")
+        TABLE+="\n| $(basename "$FILE") | $VALUE |"
+      done <<< "$MATCHES"
+  
+      # Print to console for logging
+      echo -e "$TABLE"
+  
+      # Save raw values as newline-separated
+      echo "obj_list=${MATCHES//$'\n'/'%0A'}" >> "$GITHUB_OUTPUT"
+  
+      # Save Markdown table (newline-safe for GITHUB_OUTPUT)
+      ESCAPED_TABLE=$(echo -e "$TABLE" | sed 's/%/%25/g; s/\n/%0A/g; s/\r/%0D/g')
+      echo "obj_table=$ESCAPED_TABLE" >> "$GITHUB_OUTPUT"
+  
+      # Write to job summary (for display in GitHub UI)
+      echo -e "$TABLE" >> "$GITHUB_STEP_SUMMARY"        
