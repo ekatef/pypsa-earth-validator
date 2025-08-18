@@ -174,7 +174,7 @@ jobs:
       run: |
         RESULTS_DIR="."
         # TODO Account also for "*/results/networks/*.nc"
-        nc_files=$(find "$RESULTS_DIR" -type f -path "*/results/*/networks/*.nc")
+        nc_files=$(find "$RESULTS_DIR" -type f -path "$RESULTS_DIR/networks/*.nc" -o -path "$RESULTS_DIR"/*/networks/*.nc)
         
         if [ -z "$nc_files" ]; then
           echo "No .nc files found in any networks folder."
