@@ -200,4 +200,15 @@ jobs:
           echo "Plot saved to: $output_path"
         
         done <<< "$nc_files"
+
+    - name: Upload plot artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: scenario-plots
+        path: plot_outputs/*.png
+    
+    - name: Add plots to summary
+      run: |
+        echo "### Network plots" >> "$GITHUB_STEP_SUMMARY"
+        echo "Download the generated plots from the [Artifacts tab](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> "$GITHUB_STEP_SUMMARY"        
      
