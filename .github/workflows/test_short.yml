@@ -190,6 +190,8 @@ jobs:
           python3 scripts/non_workflow/plot_network.py "$nc_file" "$output_path"
         
           echo "Plot saved to: $output_path"
+
+          echo "| $folder | ![]($output_path) |" >> "$GITHUB_STEP_SUMMARY"
         
         done <<< "$nc_files"
      
