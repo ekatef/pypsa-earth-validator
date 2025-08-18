@@ -141,7 +141,8 @@ jobs:
 
 
         # Write to the table
-        TABLE="| File | Objective Value |\n|:-----|------------------:|"
+        TABLE="| Folder | File | Objective Value |"
+        TABLE+="\n|:--------|:-----|------------------:|"
 
         while IFS= read -r line; do
           FILE=$(echo "$line" | cut -d: -f1)
