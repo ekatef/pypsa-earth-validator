@@ -37,7 +37,7 @@ jobs:
         echo "Current working directory: $(pwd)"
         echo "All files and folders after artifact download:"
         # find . -type f -o -type d | sort
-        ls -al
+        ls -alR /home/runner
 
     # - name: Cat all files
     #   run: |
@@ -47,6 +47,20 @@ jobs:
     #       echo
     #     done
 
+    - name: Extract objective
+      id: extract_obj
+      run: |
+        OBJ_STRING="(?<=INFO:__main__:Objective function: ).*"
+        echo "Extracting the objective values from ./logs/solve_network/*_python.log"
+        OBJ_FOUND=$(grep -Po "$OBJ_STRING" ./logs/solve_network/*_python.log || true)
+        # The objective can be also empty (in case some tests failed)
+        if [ -z "$OBJ_FOUND" ]; then
+          echo "Objective not found."
+          exit 1
+        else
+          echo "Objective value found: $OBJ_FOUND"
+          echo "obj_match=$OBJ_FOUND" >> "$GITHUB_OUTPUT"
+        fi
 
 
     # - name: Extract the objective from the logs
