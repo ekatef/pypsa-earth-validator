@@ -172,6 +172,7 @@ jobs:
     - name: Plot CI outputs
       id: extract_obj
       run: |
+        RESULTS_DIR="."
         # TODO Account also for "*/results/networks/*.nc"
         nc_files=$(find "$RESULTS_DIR" -type f -path "*/results/*/networks/*.nc")
         
