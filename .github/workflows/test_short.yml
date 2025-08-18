@@ -221,3 +221,20 @@ jobs:
     
         RAW_URL="https://raw.githubusercontent.com/$REPO/$BRANCH/$FILE"
         echo "![Plot]($RAW_URL)" >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Publish to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./plot_outputs
+        publish_branch: gh-pages
+        force_orphan: true  # Optional: makes the gh-pages branch have no history
+
+    - name: Add all published plots to summary
+      run: |
+        echo "## Published Plots" >> "$GITHUB_STEP_SUMMARY"
+        for file in ./plot_outputs/*.png; do
+          name=$(basename "$file")
+          echo "![Plot](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$name)" >> "$GITHUB_STEP_SUMMARY"
+        done
+      shell: bash
