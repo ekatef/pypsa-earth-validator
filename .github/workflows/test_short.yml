@@ -147,7 +147,15 @@ jobs:
           FILE=$(echo "$line" | cut -d: -f1)
           VALUE=$(echo "$line" | cut -d: -f2-)
           BASENAME=$(basename "$FILE")
-          TABLE+="\n| $BASENAME | \`$VALUE\` |"
+
+          # An enclosing folder contains a name of the run
+          FOLDER=$(echo "$FILE" | sed -E 's|.*/logs/([^/]+)/solve_network/.*|\1|')
+
+          if [[ "$FILE" == ./logs/solve_network/* ]]; then
+            FOLDER="tutorial pure"
+          fi
+
+          TABLE+="\n| $FOLDER | $BASENAME | \`$VALUE\` |"
         done <<< "$OBJ_FOUND"
         
         # Print to terminal
