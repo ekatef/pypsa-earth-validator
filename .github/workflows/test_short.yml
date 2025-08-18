@@ -225,7 +225,7 @@ jobs:
     - name: Publish to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        personal_token: ${{ secrets.GH_PAGES_TOKEN }}
         publish_dir: ./plot_outputs
         publish_branch: gh-pages
         force_orphan: true  # Optional: makes the gh-pages branch have no history
