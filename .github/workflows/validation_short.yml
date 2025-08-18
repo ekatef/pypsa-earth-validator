@@ -36,15 +36,16 @@ jobs:
       run: |
         echo "Current working directory: $(pwd)"
         echo "All files and folders after artifact download:"
-        find . -type f -o -type d | sort
+        # find . -type f -o -type d | sort
+        ls -al
 
-    - name: Cat all files
-      run: |
-        find . -type f -path "*/logs/*" | while read file; do
-          echo "===== $file ====="
-          cat "$file"
-          echo
-        done
+    # - name: Cat all files
+    #   run: |
+    #     find . -type f -path "*/logs/*" | while read file; do
+    #       echo "===== $file ====="
+    #       cat "$file"
+    #       echo
+    #     done
 
 
 
