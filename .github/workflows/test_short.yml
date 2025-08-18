@@ -152,7 +152,12 @@ jobs:
         
         # Print to terminal
         echo -e "$TABLE"
+
+        echo "The output table is formed"
         
         echo "### Objective Results of CI Run" >> "$GITHUB_STEP_SUMMARY"
+
+        echo "GITHUB_STEP_SUMMARY successfully supplemented with a header"  
+
         echo -e "$TABLE" >> "$GITHUB_STEP_SUMMARY"
      
