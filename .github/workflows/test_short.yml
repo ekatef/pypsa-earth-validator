@@ -172,6 +172,9 @@ jobs:
     - name: Plot CI outputs
       id: plot_networks
       run: |
+        # Needed to facilitate upload to the artifacts
+        mkdir -p plot_outputs
+
         RESULTS_DIR="."
         # TODO Account also for "*/results/networks/*.nc"
         nc_files=$(find "$RESULTS_DIR" -type f -path "$RESULTS_DIR/networks/*.nc" -o -path "$RESULTS_DIR"/*/networks/*.nc)
