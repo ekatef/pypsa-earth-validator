@@ -112,10 +112,11 @@ jobs:
         echo "All files and folders after artifact download:"
         find . -type f -o -type d | sort
   
-    - name: Cat all files
-      run: |
-        find . -type f -path "*/logs/*" | while read file; do
-          echo "===== $file ====="
-          cat "$file"
-          echo
-        done
+    # - name: Cat all files
+    #   run: |
+    #     # find . -type f -path "*/logs/*" | while read file; do
+    #     #   echo "===== $file ====="
+    #     #   cat "$file"
+    #     #   echo
+    #     # done
+
