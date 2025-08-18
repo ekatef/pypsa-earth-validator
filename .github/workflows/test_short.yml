@@ -133,8 +133,11 @@ jobs:
           exit 1
         else
           echo "Objective value found: $OBJ_FOUND"
+          echo "Writing to GitHub output"
           echo "obj_match=$OBJ_FOUND" >> "$GITHUB_OUTPUT"
         fi
+
+        echo "The objective extracted successfully"
 
         # Build Markdown table
         TABLE="| File | Objective Value |\n|------|------------------|"
