@@ -236,8 +236,14 @@ jobs:
       run: |
         echo "### Published Plots" >> "$GITHUB_STEP_SUMMARY"
         for file in $(find ./plot_outputs -type f -name "*.png"); do
+          rel_path=${file#./plot_outputs/}
           name=$(basename "$file")
-          echo "![Plot](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$name)" >> "$GITHUB_STEP_SUMMARY"
+          folder_name=$(basename "$(dirname "$file")")
+            {
+              echo "### $folder_name $name"
+              echo "![Plot](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$rel_path)"
+              echo ""  # blank line for spacing
+            } >> "$GITHUB_STEP_SUMMARY"
         done
       shell: bash
 
