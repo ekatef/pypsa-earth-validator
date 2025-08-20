@@ -176,7 +176,6 @@ jobs:
         mkdir -p plot_outputs
 
         RESULTS_DIR="."
-        # TODO Account also for "*/results/networks/*.nc"
         nc_files=$(find "$RESULTS_DIR" -type f -path "*/results/networks/*.nc" -o -path "*/results/*/networks/*.nc")
         
         if [ -z "$nc_files" ]; then
@@ -232,7 +231,7 @@ jobs:
 
     - name: Add all published plots to summary
       run: |
-        echo "## Published Plots" >> "$GITHUB_STEP_SUMMARY"
+        echo "### Published Plots" >> "$GITHUB_STEP_SUMMARY"
         for file in ./plot_outputs/*.png; do
           name=$(basename "$file")
           echo "![Plot](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$name)" >> "$GITHUB_STEP_SUMMARY"
@@ -240,4 +239,3 @@ jobs:
       shell: bash
 
 
-      
