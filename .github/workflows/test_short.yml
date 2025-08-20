@@ -177,7 +177,7 @@ jobs:
 
         RESULTS_DIR="."
         # TODO Account also for "*/results/networks/*.nc"
-        nc_files=$(find "$RESULTS_DIR" -type f -path "$RESULTS_DIR/networks/*.nc" -o -path "$RESULTS_DIR"/*/networks/*.nc)
+        nc_files=$(find "$RESULTS_DIR" -type f -path "*/results/networks/*.nc" -o -path "*/results/*/networks/*.nc")
         
         if [ -z "$nc_files" ]; then
           echo "No .nc files found in any networks folder."
@@ -238,3 +238,6 @@ jobs:
           echo "![Plot](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$name)" >> "$GITHUB_STEP_SUMMARY"
         done
       shell: bash
+
+
+      
