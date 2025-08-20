@@ -189,8 +189,11 @@ jobs:
           echo "Processing file: $nc_file"
         
           folder=$(dirname "$nc_file")  # get the folder containing the .nc file
-          filename=$(basename "$nc_file" .nc)  # strip .nc extension
-          output_path="plot_outputs/${filename}_${i}_plot.png"
+          runfolder=$(basename "$(dirname "$(dirname "$nc_file")")")
+
+          subfolder="plot_outputs/$runfolder"
+          mkdir -p "$subfolder"
+          output_path="${subfolder}/${filename}_${i}_plot.png"
 
           i+=1
         
@@ -232,7 +235,7 @@ jobs:
     - name: Add all published plots to summary
       run: |
         echo "### Published Plots" >> "$GITHUB_STEP_SUMMARY"
-        for file in ./plot_outputs/*.png; do
+        for file in $(find ./plot_outputs -type f -name "*.png"); do
           name=$(basename "$file")
           echo "![Plot](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$name)" >> "$GITHUB_STEP_SUMMARY"
         done
