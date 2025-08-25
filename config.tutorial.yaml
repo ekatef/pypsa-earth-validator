@@ -14,8 +14,12 @@ enable:
   build_natura_raster: true
   progress_bar: false
 
+run:
+  name: "tutorial" # use this to keep track of runs with different settings
+  sector_name: "tutorial_sec" # use this to keep track of sector scenario runs  
+
 scenario:
-  clusters: [6]
+  clusters: [6] 
   opts: [Co2L-4H]
 
 snapshots:
