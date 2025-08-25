@@ -135,7 +135,7 @@ jobs:
         else
           echo "Objective value found: $OBJ_FOUND"
           echo "Writing to GitHub output"
-          echo "obj_match=$OBJ_FOUND" >> "$GITHUB_OUTPUT"
+          printf "%s\n" "obj_match=$OBJ_FOUND" >> "$GITHUB_OUTPUT"
         fi
 
         echo "The objective extracted successfully"
