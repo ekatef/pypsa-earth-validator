@@ -88,7 +88,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: ci_outputs
+        name: ci_outputs-${{ matrix.os }}
         # name: results-${{ matrix.os }}
         path: |
           logs
@@ -103,7 +103,7 @@ jobs:
     - name: Download feature logs
       uses: actions/download-artifact@v4
       with:
-        name: ci_outputs
+        name: ci_outputs-${{ matrix.os }}
         # path: ./artifacts  # All artifacts go here, each in their own subfolder
 
     - name: Show downloaded structure
