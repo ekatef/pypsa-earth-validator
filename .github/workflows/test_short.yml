@@ -248,7 +248,7 @@ jobs:
         publish_branch: gh-pages
         force_orphan: true  # Optional: makes the gh-pages branch have no history
 
-    - name: Add all published plots to summary
+    - name: Add plots to summary
       run: |
         echo "### Network Plots" >> "$GITHUB_STEP_SUMMARY"
         for file in $(find ./plot_outputs-${{ matrix.os }} -type f -name "*.png"); do
