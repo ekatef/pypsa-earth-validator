@@ -179,7 +179,7 @@ jobs:
 
         echo "The output table is formed"
         
-        echo "### Objective Results of CI Run" >> "$GITHUB_STEP_SUMMARY"
+        echo "### Values of Objective Function" >> "$GITHUB_STEP_SUMMARY"
 
         echo "GITHUB_STEP_SUMMARY successfully supplemented with a header"  
 
@@ -250,7 +250,7 @@ jobs:
 
     - name: Add all published plots to summary
       run: |
-        echo "### Published Plots" >> "$GITHUB_STEP_SUMMARY"
+        echo "### Network Plots" >> "$GITHUB_STEP_SUMMARY"
         for file in $(find ./plot_outputs-${{ matrix.os }} -type f -name "*.png"); do
           rel_path=${file#./plot_outputs-${{ matrix.os }}/}
           name=$(basename "$file")
