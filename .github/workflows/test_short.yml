@@ -223,7 +223,7 @@ jobs:
     - name: Upload plot artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: scenario-plots
+        name: scenario-plots-${{ matrix.os }}
         path: plot_outputs-${{ matrix.os }}
     
     - name: Add plots to summary
