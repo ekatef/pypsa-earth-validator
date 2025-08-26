@@ -241,7 +241,7 @@ jobs:
         echo "### Network Plots" >> "$GITHUB_STEP_SUMMARY"
         for file in $(find ./plot_outputs-${{ matrix.os }} -type f -name "*.png"); do
           rel_path=${file#./plot_outputs-${{ matrix.os }}/}
-          name=$(basename "$file")
+          name=$(basename "$file" .nc)
           folder_name=$(basename "$(dirname "$file")")
             {
               echo "### $folder_name; $name"
