@@ -225,20 +225,6 @@ jobs:
       with:
         name: scenario-plots-${{ matrix.os }}
         path: plot_outputs-${{ matrix.os }}
-    
-    - name: Add plots to summary
-      run: |
-        echo "### Network plots" >> "$GITHUB_STEP_SUMMARY"
-        echo "Download the generated plots from the [Artifacts tab](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> "$GITHUB_STEP_SUMMARY"        
-     
-    #- name: Add image from raw URL
-    #  run: |
-    #    REPO="${{ github.repository }}"
-    #    BRANCH="${{ github.ref_name }}"
-    #    FILE="results/plot_outputs/my_plot.png"
-    #
-    #    RAW_URL="https://raw.githubusercontent.com/$REPO/$BRANCH/$FILE"
-    #    echo "![Plot]($RAW_URL)" >> "$GITHUB_STEP_SUMMARY"
 
     - name: Publish to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
@@ -262,5 +248,19 @@ jobs:
             } >> "$GITHUB_STEP_SUMMARY"
         done
       shell: bash
+
+    - name: Add plots to summary
+      run: |
+        echo "### Network plots" >> "$GITHUB_STEP_SUMMARY"
+        echo "The generated plots are available for download from the [Artifacts tab](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> "$GITHUB_STEP_SUMMARY"        
+     
+    #- name: Add image from raw URL
+    #  run: |
+    #    REPO="${{ github.repository }}"
+    #    BRANCH="${{ github.ref_name }}"
+    #    FILE="results/plot_outputs/my_plot.png"
+    #
+    #    RAW_URL="https://raw.githubusercontent.com/$REPO/$BRANCH/$FILE"
+    #    echo "![Plot]($RAW_URL)" >> "$GITHUB_STEP_SUMMARY"      
 
 
