@@ -190,7 +190,7 @@ jobs:
       id: plot_networks
       run: |
         # Needed to facilitate upload to the artifacts
-        mkdir -p plot_outputs
+        mkdir -p plot_outputs-${{ matrix.os }}
 
         RESULTS_DIR="."
         nc_files=$(find "$RESULTS_DIR" -type f -path "*/results/networks/*.nc" -o -path "*/results/*/networks/*.nc")
@@ -208,7 +208,7 @@ jobs:
           folder=$(dirname "$nc_file")  # get the folder containing the .nc file
           runfolder=$(basename "$(dirname "$(dirname "$nc_file")")")
 
-          subfolder="plot_outputs/$runfolder"
+          subfolder="plot_outputs-${{ matrix.os }}/$runfolder"
           mkdir -p "$subfolder"
           output_path="${subfolder}/${filename}_${i}_plot.png"
 
@@ -224,7 +224,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: scenario-plots
-        path: plot_outputs
+        path: plot_outputs-${{ matrix.os }}
     
     - name: Add plots to summary
       run: |
@@ -244,15 +244,15 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         personal_token: ${{ secrets.GH_PAGES_TOKEN }}
-        publish_dir: ./plot_outputs
+        publish_dir: ./plot_outputs-${{ matrix.os }}
         publish_branch: gh-pages
         force_orphan: true  # Optional: makes the gh-pages branch have no history
 
     - name: Add all published plots to summary
       run: |
         echo "### Published Plots" >> "$GITHUB_STEP_SUMMARY"
-        for file in $(find ./plot_outputs -type f -name "*.png"); do
-          rel_path=${file#./plot_outputs/}
+        for file in $(find ./plot_outputs-${{ matrix.os }} -type f -name "*.png"); do
+          rel_path=${file#./plot_outputs-${{ matrix.os }}/}
           name=$(basename "$file")
           folder_name=$(basename "$(dirname "$file")")
             {
