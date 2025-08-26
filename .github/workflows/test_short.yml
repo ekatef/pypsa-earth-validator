@@ -208,9 +208,11 @@ jobs:
           folder=$(dirname "$nc_file")  # get the folder containing the .nc file
           runfolder=$(basename "$(dirname "$(dirname "$nc_file")")")
 
+          filename=$(basename "$nc_file")
+
           subfolder="plot_outputs-${{ matrix.os }}/$runfolder"
           mkdir -p "$subfolder"
-          output_path="${subfolder}/${filename}_${i}_plot.png"
+          output_path="${subfolder}/${filename}_${i}.png"
 
           i+=1
         
