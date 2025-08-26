@@ -244,7 +244,7 @@ jobs:
           name=$(basename "$file")
           folder_name=$(basename "$(dirname "$file")")
             {
-              echo "### $folder_name $name"
+              echo "### $folder_name; $name"
               echo "![Plot](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$rel_path)"
               echo ""  # blank line for spacing
             } >> "$GITHUB_STEP_SUMMARY"
