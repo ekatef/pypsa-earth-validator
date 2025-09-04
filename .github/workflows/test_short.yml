@@ -158,7 +158,7 @@ jobs:
         echo "The objective extracted successfully"
 
         TABLE="| Folder | File | Objective Value |"
-        TABLE+="\n|:--------|:-----|------------------:|"
+        TABLE+="\n|:-----|:-----|-----:|-----:|"
 
         while IFS= read -r line; do
           FILE=$(echo "$line" | cut -d: -f1)
@@ -172,7 +172,7 @@ jobs:
             FOLDER="default"
           fi
 
-          TABLE+="\n| $FOLDER | $BASENAME | \`$VALUE\` |"
+          TABLE+="\n| $FOLDER | $BASENAME | \`$VALUE\` | \`$VALUE\` |"
         done <<< "$OBJ_FOUND"
         
         echo -e "$TABLE"
