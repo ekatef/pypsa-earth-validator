@@ -13,7 +13,7 @@ REF_OBJ_DF = pd.DataFrame(
     }
 )
 
-def extract_obj_for_path(dir, fl, ref_df):
+def extract_obj_for_path(dir, fl, ref_df=REF_OBJ_DF):
     mask = (
         (ref_df["folder"] == dir) &
         (ref_df["file"] == fl)
