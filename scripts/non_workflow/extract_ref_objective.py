@@ -24,7 +24,7 @@ def extract_obj_for_path(dir, fl, ref_df=REF_OBJ_DF):
     if obj_value.empty:
         obj_value = "NA"
     else:
-         obj_value = obj_value[0]   
+         obj_value = obj_value.values[0]  
 
     return obj_value
 
