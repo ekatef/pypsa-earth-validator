@@ -170,6 +170,8 @@ jobs:
         TABLE="| Folder | File | Current Objective | Reference Objective |"
         TABLE+="\n|:----|:-----|------------------:|--------------------:|"
 
+        CSV="folder,file,objective"
+
         while IFS= read -r line; do
           FILE=$(echo "$line" | cut -d: -f1)
           VALUE=$(echo "$line" | cut -d: -f2-)
@@ -188,6 +190,7 @@ jobs:
           REF_VALUE=$(extract_obj_for_path_py "$FOLDER" "$BASENAME")
 
           TABLE+="\n| $FOLDER | $BASENAME | \`$VALUE_SCALED\` | \`$REF_VALUE\` |"
+          CSV+="\n$FOLDER,$BASENAME,\`$VALUE_SCALED\`"
         done <<< "$OBJ_FOUND"
         
         echo -e "$TABLE"
@@ -199,6 +202,8 @@ jobs:
         echo "GITHUB_STEP_SUMMARY successfully supplemented with a header"  
 
         printf "%b\n" "$TABLE" >> "$GITHUB_STEP_SUMMARY"
+
+        printf "%b\n" "$CSV" >> "$GITHUB_STEP_SUMMARY"
 
 
     - name: Plot CI outputs
