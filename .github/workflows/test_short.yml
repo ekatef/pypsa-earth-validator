@@ -203,7 +203,7 @@ jobs:
 
         printf "%b\n" "$TABLE" >> "$GITHUB_STEP_SUMMARY"
 
-        printf "%b\n" "$CSV" >> "$GITHUB_STEP_SUMMARY"
+        printf "%b" "$CSV_CONTENT" > "$CSV_FILE"
 
 
     - name: Plot CI outputs
