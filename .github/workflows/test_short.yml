@@ -213,6 +213,11 @@ jobs:
 
         printf "%b" "$CSV_CONTENT" > "$CSV_FILE"
 
+    - name: Upload csv artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ref_objectives-${{ matrix.os }}
+        path: ref_objectives-${{ matrix.os }}.csv          
 
     - name: Plot CI outputs
       id: plot_networks
