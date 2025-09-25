@@ -170,7 +170,9 @@ jobs:
         TABLE="| Folder | File | Current Objective | Reference Objective |"
         TABLE+="\n|:----|:-----|------------------:|--------------------:|"
 
-        CSV="folder,file,objective"
+        CSV_FILE="ref_objectives-${{ matrix.os }}.csv"
+
+        CSV_CONTENT="folder,file,objective"
 
         while IFS= read -r line; do
           FILE=$(echo "$line" | cut -d: -f1)
@@ -190,7 +192,9 @@ jobs:
           REF_VALUE=$(extract_obj_for_path_py "$FOLDER" "$BASENAME")
 
           TABLE+="\n| $FOLDER | $BASENAME | \`$VALUE_SCALED\` | \`$REF_VALUE\` |"
-          CSV+="\n$FOLDER,$BASENAME,\`$VALUE_SCALED\`"
+
+          CSV_CONTENT+=$'\n'"$(csvq "$FOLDER"),$(csvq "$BASENAME"),$(csvq "`$VALUE_SCALED`")"
+
         done <<< "$OBJ_FOUND"
         
         echo -e "$TABLE"
