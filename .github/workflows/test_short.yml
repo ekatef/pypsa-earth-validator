@@ -165,7 +165,11 @@ jobs:
         dir, fl = sys.argv[1], sys.argv[2]
         print(extract_obj_for_path(dir, fl))
         PY
-        }        
+        }  
+
+        # Create properly formatted outputs
+
+        clean_csv_cell() { local s=${1//\"/\"\"}; printf '"%s"' "$s"; }  
 
         TABLE="| Folder | File | Current Objective | Reference Objective |"
         TABLE+="\n|:----|:-----|------------------:|--------------------:|"
@@ -193,7 +197,7 @@ jobs:
 
           TABLE+="\n| $FOLDER | $BASENAME | \`$VALUE_SCALED\` | \`$REF_VALUE\` |"
 
-          CSV_CONTENT+=$'\n'"$(csvq "$FOLDER"),$(csvq "$BASENAME"),$(csvq "`$VALUE_SCALED`")"
+          CSV_CONTENT+=$'\n'"$(clean_csv_cell "$FOLDER"),$(clean_csv_cell "$BASENAME"),$(clean_csv_cell "`$VALUE_SCALED`")"
 
         done <<< "$OBJ_FOUND"
         
