@@ -52,21 +52,24 @@ def extract_obj_for_path(dir, fl, ref_df=REF_OBJ_DF):
 
     return obj_value
 
+# print("REF_OBJ_DF")
+# print(REF_OBJ_DF)    
 
-print("test 1")
-print(
-   extract_obj_for_path(
-       "custom",
-       "elec_s_6_ec_lcopt_Co2L-4H_python.log",
-       ref_df=REF_OBJ_DF
-   )
-)
 
-print("test 2")
-print(
-   extract_obj_for_path(
-       "custom2",
-       "elec_s_6_ec_lcopt_Co2L-4H_python.log",
-       ref_df=REF_OBJ_DF
-   )
-)
+# print("test 1")
+# print(
+#    extract_obj_for_path(
+#        "custom",
+#        "elec_s_6_ec_lcopt_Co2L-4H_python.log",
+#        ref_df=REF_OBJ_DF
+#    )
+# )
+
+# print("test 2")
+# print(
+#    extract_obj_for_path(
+#        "custom2",
+#        "elec_s_6_ec_lcopt_Co2L-4H_python.log",
+#        ref_df=REF_OBJ_DF
+#    )
+# )
