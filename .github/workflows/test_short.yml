@@ -169,7 +169,17 @@ jobs:
 
         # Create properly formatted outputs
 
-        clean_csv_cell() { local s=${1//\"/\"\"}; printf '"%s"' "$s"; }  
+        clean_csv_cell() {
+          local s=$1
+          # Add quotes if the field contains a delimiter or a new string
+          if [[ "$s" == *\"* || "$s" == *,* || "$s" == *$'\n'* || "$s" == *$'\r'* || "$s" == " "* || "$s" == *" " ]]; then
+            # Escape embedded quotes by doubling them
+            s=${s//\"/\"\"}
+            printf '"%s"' "$s"
+          else
+            printf '%s' "$s"
+          fi
+        } 
 
         TABLE="| Folder | File | Current Objective | Reference Objective |"
         TABLE+="\n|:----|:-----|------------------:|--------------------:|"
